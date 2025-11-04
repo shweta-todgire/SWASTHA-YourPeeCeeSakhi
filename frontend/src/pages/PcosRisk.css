@@ -1,0 +1,159 @@
+.pcos-container {
+  font-family: 'Arial', sans-serif;
+  background-color: #dcd8c1;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: 0px;
+  color: #2f3e1e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  margin-top: 0px;
+  padding-top: 20px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #3e4b36;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.input-section input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 6px;
+  border: 1px solid #666;
+  font-size: 16px;
+}
+
+.next-btn {
+  padding: 10px 20px;
+  background-color: #2f3e1e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.next-btn:hover {
+  background-color: #456c35;
+}
+
+.question-box {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
+  background: #272A2533;
+  padding: 20px;
+  border: #394931 solid 1.5px;
+  border-radius: 10px;
+  color: #222;
+  font-size: 16px;
+  line-height: 1.6;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+}
+
+.btn-group {
+  margin-top: 20px;
+}
+
+.btn-group button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #2f3e1e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-group button:hover {
+  background-color: #456c35;
+}
+
+.progress {
+  width: 600px;
+  height: 10px;
+  background-color: #a8a8a8;
+  border-radius: 5px;
+  margin-top: 25px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #2f3e1e;
+  border-radius: 5px;
+  transition: width 0.4s ease-in-out;
+}
+
+.progress-text {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2f3e1e;
+}
+
+.result {
+  margin-top: 40px;
+}
+
+.progress-bar {
+  width: 60%;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 10px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+.risk-text {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #2f3e1e;
+}
+
+.circular-chart {
+  width: 150px;
+  margin: 20px auto;
+}
+
+.circular-chart .circle-text {
+  font-size: 1.5rem;
+  fill: #333;
+}
+
+.tips-box {
+  background-color: #272A254D;
+  border: #394931 solid 2px;
+  padding: 18px;
+  margin: 25px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 12px rgba(0,0,0,0.3);
+  width: 900px;
+}
+
+.tips-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tips-box li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #333;
+  padding-left: 10px;
+}

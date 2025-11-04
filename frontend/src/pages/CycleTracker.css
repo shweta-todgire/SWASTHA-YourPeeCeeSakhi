@@ -1,0 +1,159 @@
+.tracker-container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #dcd8c1;
+  padding: 0px;
+  border-radius: 12px;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  padding: 20px;
+  margin-bottom: 0px;
+}
+
+.heading {
+  color: #394931;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  font-size: 26px;
+  margin-bottom: 30px;
+  margin-top: 0px;
+}
+
+.itallic{
+  color: #394931;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.date-input {
+  margin: 15px 0;
+}
+
+.date-input input {
+  padding: 5px;
+  background: #272A2533;
+  border: #394931 solid 1.5px;  
+  border-radius: 5px;
+  height: 20px;
+}
+
+.date-input button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  background: #394931;
+  color: #fff;
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.calendar-nav {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-weight: bold;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 20px auto; 
+  height: 300px;
+  width: 700px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  margin: auto; 
+  justify-content: center;
+  align-items: center;
+  background: #272A2533;
+  border: #394931 solid 1px;  
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Colors */
+.period {
+  background-color: #394931 !important;
+  color: white;
+}
+
+.ovulation {
+  background-color: #b76ba3 !important;
+  color: white;
+}
+
+.fertile {
+  background-color: #6fa4c7 !important;
+  color: white;
+}
+
+.next-period {
+  background-color: #f28c8c !important;
+  color: white;
+}
+
+/* Legend */
+.legend {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20%;
+}
+
+.legend .box {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+.legend .period { background: #394931; }
+.legend .ovulation { background: #b76ba3; }
+.legend .fertile { background: #6fa4c7; }
+.legend .next-period { background: #f28c8c; }
+
+/* Table */
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+  background: #bcbca0;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #394931;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.table-heading{
+  color: #394931;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 30px;
+}
+
+th {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}

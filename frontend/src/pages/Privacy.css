@@ -1,0 +1,39 @@
+.privacy-page {
+  font-family: Arial, sans-serif;
+  padding: 40px 20px;
+  background-color: #dcd8c1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.logo-container {
+  margin:10px;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* ensures image is centered */
+}
+
+.policy-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: #272A254D;
+  padding: 30px;
+  border-radius: 15px;
+  border: #394931 solid 2px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.policy-container h1, .policy-container h2 {
+  color: #394931;;
+}
+
+.policy-container ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,145 @@
+.logo {
+  width: 180px;     
+  height: auto;     
+  margin-bottom: 1rem;
+}
+
+.welcome-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0.5rem 0;
+  color: #000;
+}
+
+.highlight {
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.welcome-subtext {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: -10px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.4;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h2, h1{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #394931;
+}
+
+.register-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #DCD8C1;
+  min-height: 100vh;
+  padding: 2rem;
+  padding-top: 0px;
+}
+
+.register-login-box {
+  background-color: #272A254D;
+  padding: 2rem;
+  border-radius: 10px;
+  border: #394931 solid 2px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 10px 10px 12px rgba(0,0,0,0.3);
+}
+
+.register-login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #f4f5f9;
+}
+
+.register-login-box button {
+  background-color: #2b3d1f;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.error {
+  color: rgb(148, 4, 4);
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.login-redirect {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-login-redirect span {
+  color: #2b3d1f;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Register_Forgot_Password {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 0 0.2rem;
+  color: #2b3d1f;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 370px;
+  padding-right: 40px; 
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #DCD8C1;
+  width: 320px;
+  max-width: 90%;
+  padding: 20px;
+  border: #394931 solid 1px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  text-align: center;
+}
+
+.popup-box p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #2b3d1f;
+}

@@ -1,0 +1,135 @@
+.logo {
+  width: 180px;     
+  height: auto;     
+  margin-bottom: 1rem;
+  margin-top: 0px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #DCD8C1;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.login-box {
+  background-color: #272A254D;
+  padding: 2rem;
+  border-radius: 10px;
+  border: #394931 solid 2px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 10px 10px 12px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #f4f5f9;
+}
+
+.login-box button {
+  background-color: #2b3d1f;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.signout-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #edeade;
+  color: #840000;
+  padding: 12px;
+  width: 100px;
+  text-align: left;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: #840000 solid 1px;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
+}
+
+.signout-btn:hover {
+  background-color: #840000;
+  color: #edeade;
+}
+
+.error {
+  color: rgb(148, 4, 4);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #394931;
+}
+
+.admin-dashboard {
+  text-align: center;
+  background: #dcd8c1;
+  padding: 20px;
+  padding-top: 0px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #272A2533;
+  padding: 15px;
+  border: #394931 solid 1px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.admin-dashboard h1, .admin-dashboard h3{
+  text-align: center;
+  color: #3e4b36;
+  margin-bottom: 20px;
+}
+
+select {
+  background: #272A2533;
+  display: block;
+  margin: 20px auto;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: #394931 solid 1px;
+  font-size: 16px;
+}
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 80%;
+  }
+  .admin-dashboard {
+    padding: 15px;
+  }
+}

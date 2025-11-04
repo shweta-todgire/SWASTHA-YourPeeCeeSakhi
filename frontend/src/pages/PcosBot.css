@@ -1,0 +1,131 @@
+.chat-container {
+  width: 100%;
+  height: 100vh;           
+  background: #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;     
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* Header */
+.chat-header {
+  height: 120px;
+  width: 1000px;              
+  background: #dcd8c1;
+  border: #394931 solid 1.5px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.chat-title {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #3b3b3b;
+}
+
+.bot-avatar {
+  height: 130px;
+  width: 130px;
+  padding-left: 100px;
+}
+
+.app-logo {
+  width: 180px;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+
+/* Chat Box */
+.chat-box {
+  width: 1000px;              
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #dcdcdc;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+.message-row.bot {
+  justify-content: flex-start;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 15px;
+  max-width: 70%;
+  font-size: 15px;
+}
+
+.message.bot {
+  background: #f6f5f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.message.user {
+  background: #d6e8d2;
+  color: #000;
+  border: 1px solid #a2c59a;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 8px;
+}
+
+/* Input Box */
+.input-box {
+  width: 1000px;              
+  display: flex;
+  padding: 10px;
+  background: #41533b;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.input-box input {
+  flex: 1;
+  background: #41533b;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+.input-box button {
+  background: #2d3e2b;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  margin-left: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
