@@ -4,13 +4,13 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const questions = [
-  { key: "period_cycle", text: "After how many days do you get your periods?", type: "number" },
+  { key: "cycle_irregularity", text: "Are your periods irregular?", type: "boolean" },
+  { key: "acne", text: "Do you have frequent acne or pimples?", type: "boolean" },
   { key: "hair_growth", text: "Do you have excessive body/facial hair growth?", type: "boolean" },
-  { key: "skin_darkening", text: "Do you notice skin darkening recently?", type: "boolean" },
-  { key: "hair_loss", text: "Do you face hair thinning or baldness?", type: "boolean" },
-  { key: "acne", text: "Do you have acne/pimples?", type: "boolean" },
-  { key: "mood_swings", text: "Do you experience mood swings?", type: "boolean" },
-  { key: "weight_gain", text: "Have you experienced sudden/unexplained weight gain?", type: "boolean" },
+  { key: "hair_loss", text: "Do you experience scalp hair thinning or loss?", type: "boolean" },
+  { key: "skin_darkening", text: "Do you notice dark patches on skin?", type: "boolean" },
+  { key: "weight_gain", text: "Have you experienced sudden or unexplained weight gain?", type: "boolean" },
+  { key: "pain", text: "Do you experience pelvic pain or discomfort?", type: "boolean" },
 ];
 
 function PcosRisk() {
@@ -18,65 +18,42 @@ function PcosRisk() {
   const [answers, setAnswers] = useState({});
   const [riskPercent, setRiskPercent] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
 
   const userEmail = localStorage.getItem("userEmail") || "";
 
-  // Rule-based risk calculation (frontend)
-  const calculateLocalRisk = (answersObj) => {
-    let risk = 0;
-    const period_cycle = Number(answersObj.period_cycle) || 28;
-    if (period_cycle < 25 || period_cycle > 35) risk += 20;
-    if (answersObj.hair_growth === 1) risk += 15;
-    if (answersObj.skin_darkening === 1) risk += 10;
-    if (answersObj.hair_loss === 1) risk += 15;
-    if (answersObj.acne === 1) risk += 15;
-    if (answersObj.mood_swings === 1) risk += 10;
-    if (answersObj.weight_gain === 1) risk += 15;
-    return Math.min(risk, 100);
-  };
-
-  // Only save to backend after last question
-  const saveFinalRisk = async (finalRisk) => {
-    if (!userEmail) {
-      alert("User email not found. Please login first.");
-      return;
-    }
-    try {
-      setLoading(true);
-      await fetch("http://localhost:5000/api/risk-prediction", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: userEmail, features: answers }),
-      });
-    } catch (err) {
-      console.error("Error saving final risk:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleAnswer = async (value) => {
     const currentQ = questions[step];
-    if (currentQ.type === "number" && (value === "" || isNaN(value))) {
-      alert("Please enter a valid number.");
-      return;
-    }
-
     const newAnswers = { ...answers, [currentQ.key]: value };
     setAnswers(newAnswers);
 
-    // Calculate risk live for progress bar
-    const localRisk = calculateLocalRisk(newAnswers);
-    setRiskPercent(localRisk);
-
-    setInputValue("");
     if (step + 1 < questions.length) {
       setStep(step + 1);
     } else {
       setFinished(true);
-      await saveFinalRisk(localRisk); // store final risk only
+      await saveFinalRisk(newAnswers); // get risk from backend only
+    }
+  };
+
+  const displayRisk = riskPercent < 10 ? 0 : riskPercent;
+
+  const saveFinalRisk = async (answersObj) => {
+    if (!userEmail) return alert("User email not found. Please login first.");
+    try {
+      setLoading(true);
+      const res = await fetch("http://localhost:5000/api/risk-prediction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: userEmail, features: answersObj }),
+      });
+      const data = await res.json();
+      if (data["ML Predicted Risk (%)"] !== undefined) {
+        setRiskPercent(data["ML Predicted Risk (%)"]);
+      }
+    } catch (err) {
+      console.error("Error saving risk:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -124,20 +101,18 @@ function PcosRisk() {
 
   return (
     <div className="pcos-container">
-      <img src="/images/App_logo.jpg" alt="Logo" className="logo" />
-      <h1 className="heading">PCOS Risk Detection</h1>
-
+      <img src="/images/App_logo.jpg" alt="logo" className="home-logo" />
+      <h1>PCOS Risk Detection</h1>
       {finished ? (
         <div className="result">
-          <div className="circular-chart" style={{ maxWidth: 200 }}>
+          <div className="circular-chart">
             <CircularProgressbar
-              value={riskPercent}
-              text={`${riskPercent}%`}
+              value={displayRisk}
+              text={`${displayRisk}%`}
               styles={buildStyles({
-                textSize: "18px",
-                pathColor: riskPercent > 60 ? "#ff4d4f" : riskPercent > 25 ? "#ffc107" : "#28a745",
+                pathColor: riskPercent > 60 ? "#ff4d4f" : riskPercent > 30 ? "#ffc107" : "#28a745",
                 textColor: "#333",
-                trailColor: "#eee",
+                textSize: "18px",
               })}
             />
           </div>
@@ -146,33 +121,10 @@ function PcosRisk() {
       ) : (
         <div className="question-box">
           <p>{questions[step].text}</p>
-          {questions[step].type === "boolean" ? (
-            <div className="btn-group">
-              <button onClick={() => handleAnswer(1)} disabled={loading}>Yes</button>
-              <button onClick={() => handleAnswer(0)} disabled={loading}>No</button>
-            </div>
-          ) : (
-            <input
-              type="number"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAnswer(Number(inputValue))}
-              placeholder="Enter value"
-              className="input-section"
-              disabled={loading}
-            />
-          )}
-          {/* Live progress bar */}
-          <div className="progress">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${riskPercent}%`,
-                background: "#394931",
-              }}
-            />
+          <div className="btn-group">
+            <button onClick={() => handleAnswer(1)} disabled={loading}>Yes</button>
+            <button onClick={() => handleAnswer(0)} disabled={loading}>No</button>
           </div>
-          <p className="progress-text">{riskPercent}% PCOS Risk</p>
         </div>
       )}
     </div>

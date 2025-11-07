@@ -124,8 +124,12 @@ function PcosJournal() {
           <input type="text" placeholder="Period Cycle Length" value={cycle} onChange={e => setCycle(e.target.value)} />
         </div>
 
+        {/* Instruction for Date */}
+        <p className="input-instruction">Select today's date:</p>
         <input type="date" value={date} onChange={e => setDate(e.target.value)} />
 
+        {/* Instruction for Mood */}
+        <p className="input-instruction">Select your today's mood:</p>
         <div className="emoji-container">
           {emojis.map((e, i) => (
             <span

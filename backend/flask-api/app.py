@@ -12,6 +12,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from collections import OrderedDict
 from dateutil.relativedelta import relativedelta
 import numpy as np
+import pandas as pd
+import joblib
 from google import genai
 import random
 
@@ -470,15 +472,21 @@ def add_entry():
 
     return jsonify({"message": "Entry added successfully"}), 200
 
-#--------------- RISK PREDICTION ---------------
+# ------------------ RISK PREDICTION ------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = joblib.load(os.path.join(BASE_DIR, "pcos_model.pkl"))
+
 class PcosRiskEntry(db.Model):
     __tablename__ = "pcos_risk"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(255), nullable=False)
-    risk_score = db.Column(db.Integer, nullable=False)
+    risk_score = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# Routes
+# Ensure DB tables are created
+with app.app_context():
+    db.create_all()
+
 @app.route("/api/risk-prediction", methods=["POST"])
 def predict():
     data = request.json
@@ -487,52 +495,45 @@ def predict():
 
     if not email:
         return jsonify({"error": "Email is required"}), 400
+    if not features or not isinstance(features, dict):
+        return jsonify({"error": "Invalid or missing features"}), 400
 
-    # Rule-based scoring
-    risk = 0
-    period_cycle = features.get("period_cycle", 28)
-    if period_cycle < 25 or period_cycle > 35:
-        risk += 20
+    # Map frontend keys → model features
+    feature_map = {
+        "cycle_irregularity": "Cycle_Delay",
+        "acne": "Acne",
+        "hair_growth": "Excessive_Hair_Growth",
+        "hair_loss": "Scalp_Hair_Loss",
+        "skin_darkening": "Dark_Skin_Patches",
+        "weight_gain": "Weight_Gain",
+        "pain": "Pain"
+    }
 
-    if features.get("hair_growth", 0) == 1:
-        risk += 15
-    if features.get("skin_darkening", 0) == 1:
-        risk += 10
-    if features.get("hair_loss", 0) == 1:
-        risk += 15
-    if features.get("acne", 0) == 1:
-        risk += 15
-    if features.get("mood_swings", 0) == 1:
-        risk += 10
-    if features.get("weight_gain", 0) == 1:
-        risk += 15
+    # Convert boolean features (0/1) to model input
+    input_data = {}
+    for frontend_key, model_key in feature_map.items():
+        val = features.get(frontend_key, 0)
+        input_data[model_key] = [1 if val else 0]
 
-    risk = min(risk, 100)
+    input_df = pd.DataFrame(input_data)
+
+    # Predict probability of PCOS
+    try:
+        prob = model.predict_proba(input_df)[0][1]
+        risk_percent = round(prob * 100, 2)
+    except Exception as e:
+        return jsonify({"error": f"Prediction failed: {str(e)}"}), 500
 
     # Save to DB
     try:
-        new_entry = PcosRiskEntry(email=email, risk_score=risk)
+        new_entry = PcosRiskEntry(email=email, risk_score=risk_percent)
         db.session.add(new_entry)
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        return jsonify({"error": f"DB error: {str(e)}"}), 500
+        return jsonify({"error": f"Database error: {str(e)}"}), 500
 
-    return jsonify({"RuleBased Risk (%)": risk})
-
-# GET all risk entries for a user 
-@app.route("/api/risk-entries", methods=["GET"])
-def get_risk_entries():
-    email = request.args.get("email")
-    if not email:
-        return jsonify({"error": "Email required"}), 400
-
-    entries = PcosRiskEntry.query.filter_by(email=email).order_by(PcosRiskEntry.created_at.desc()).all()
-    result = [
-        {"risk_score": e.risk_score, "created_at": e.created_at.strftime("%Y-%m-%d %H:%M:%S")}
-        for e in entries
-    ]
-    return jsonify({"entries": result})
+    return jsonify({"ML Predicted Risk (%)": risk_percent})
 
 #---------------- BOT -----------------
 

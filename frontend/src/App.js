@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Main from './pages/Main'; // <-- Import Main page
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import FeedbackModal from './pages/FeedbackModal';
@@ -23,11 +24,13 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Root/Main page */}
+        <Route path="/" element={<Main />} /> 
+        
         {/* Main User Routes */}
-        <Route path="/" element={<Register />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/Home" element={<Home />} />  
 
         {/* Auth & Security */}
         <Route path="/ForgotPassword" element={<ForgotPassword />} />

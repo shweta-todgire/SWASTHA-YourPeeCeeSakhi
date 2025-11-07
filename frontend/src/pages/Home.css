@@ -460,3 +460,58 @@ footer {
   font-size: 14px;
   margin-bottom: 10px;
 }
+
+/* Register Button */
+.register-button {
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #344a25; 
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.register-button:hover {
+  background-color: #202e17;
+  transform: scale(1.05);
+}
+
+/* Prompt Box */
+.prompt-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  opacity: 0.95;
+  font-size: 14px;
+  animation: fadeInOut 3s forwards;
+}
+
+/* Fade in and out animation for prompt */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  10% {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

@@ -76,6 +76,12 @@
     flex: 1;          
 }
 
+.input-instruction {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
 .emoji-container {
     display: flex;
     justify-content: space-around;
