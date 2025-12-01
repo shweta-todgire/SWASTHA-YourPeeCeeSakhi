@@ -61,19 +61,3 @@ Educates users through articles on:
 **Backend:** Flask (Python)
 
 **Database:** MySQL
-
-## 📸 Screenshots
-
-1. Home Page
-
-2. User Dashboard
-
-3. PCOS Risk Prediction Page
-
-4. Period Tracker
-
-5. Journal Writing
-
-6. AI Chatbot
-
-7. Admin Dashboard
